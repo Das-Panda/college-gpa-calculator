@@ -1,0 +1,44 @@
+# Define a dictionary to convert letter grades to GPA values
+letter_to_gpa = {'A+': 4.0, 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0}
+
+# Initialize variables for total credit hours and quality points
+total_credit_hours = 0
+total_quality_points = 0
+
+# Ask for semester and year
+semester = input("What semester is this? ")
+year = input("What year is it? ")
+
+# Ask for classes taken this semester
+num_classes = int(input("How many classes did you take this semester? "))
+for i in range(num_classes):
+    print(f"Class {i+1}:")
+    class_name = input("Class Name and Number: ")
+    credit_hours = int(input("Credit Hours: "))
+    letter_grade = input("Final Grade (e.g. A-): ")
+    gpa = letter_to_gpa[letter_grade]
+    total_credit_hours += credit_hours
+    total_quality_points += credit_hours * gpa
+
+# Ask if there is another semester
+another_semester = input("Did you take classes in another semester (yes or no)? ").lower()
+while another_semester == "yes":
+    # Ask for classes taken in the next semester
+    num_classes = int(input("How many classes did you take this semester? "))
+    for i in range(num_classes):
+        print(f"Class {i+1}:")
+        class_name = input("Class Name and Number: ")
+        credit_hours = int(input("Credit Hours: "))
+        letter_grade = input("Final Grade (e.g. A-): ")
+        gpa = letter_to_gpa[letter_grade]
+        total_credit_hours += credit_hours
+        total_quality_points += credit_hours * gpa
+    # Ask if there is another semester
+    another_semester = input("Did you take classes in another semester (yes or no)? ").lower()
+
+# Calculate GPA and display result
+if total_credit_hours > 0:
+    gpa = total_quality_points / total_credit_hours
+    print(f"Your GPA for {semester} {year} is: {gpa:.2f}")
+else:
+    print("You did not take any classes.")
